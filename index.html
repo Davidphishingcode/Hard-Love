@@ -1,0 +1,235 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>I Love You እድል</title>
+
+<link href="https://fonts.googleapis.com/css2?family=Great+Vibes&family=Poppins:wght@300;600&display=swap" rel="stylesheet">
+
+<style>
+*{
+margin:0;
+padding:0;
+box-sizing:border-box;
+font-family:Poppins,sans-serif;
+}
+
+body{
+overflow:hidden;
+background:black;
+height:100vh;
+}
+
+/* background slideshow */
+.bg{
+position:fixed;
+width:100%;
+height:100%;
+top:0;
+left:0;
+background-size:cover;
+background-position:center;
+animation:slide 18s infinite;
+filter:brightness(.35);
+z-index:-5;
+}
+
+@keyframes slide{
+0%{background-image:url("25759.jpg")}
+33%{background-image:url("25758.jpg")}
+66%{background-image:url("25811.jpg")}
+100%{background-image:url("25759.jpg")}
+}
+
+/* password screen */
+#lock{
+position:absolute;
+width:100%;
+height:100%;
+display:flex;
+justify-content:center;
+align-items:center;
+backdrop-filter:blur(18px);
+z-index:999;
+}
+
+.box{
+padding:40px;
+border-radius:30px;
+background:rgba(255,255,255,.08);
+backdrop-filter:blur(20px);
+border:1px solid rgba(255,255,255,.2);
+text-align:center;
+box-shadow:0 0 40px rgba(255,0,90,.4);
+}
+
+input{
+padding:15px;
+width:220px;
+border:none;
+outline:none;
+border-radius:15px;
+font-size:20px;
+text-align:center;
+}
+
+button{
+margin-top:15px;
+padding:12px 35px;
+border:none;
+border-radius:15px;
+background:#ff0055;
+color:white;
+font-size:20px;
+cursor:pointer;
+}
+
+/* main */
+#main{
+display:none;
+height:100vh;
+position:relative;
+}
+
+/* heart image */
+.heart{
+position:absolute;
+top:50%;
+left:50%;
+transform:translate(-50%,-50%);
+width:260px;
+animation:beat 1s infinite;
+z-index:5;
+}
+
+@keyframes beat{
+0%,100%{transform:translate(-50%,-50%) scale(1)}
+50%{transform:translate(-50%,-50%) scale(1.12)}
+}
+
+/* ecg */
+.ecg{
+position:absolute;
+width:100%;
+top:50%;
+transform:translateY(-50%);
+opacity:.9;
+z-index:2;
+}
+
+/* text */
+.text{
+position:absolute;
+top:15%;
+width:100%;
+text-align:center;
+color:white;
+z-index:10;
+}
+
+.text h1{
+font-family:'Great Vibes',cursive;
+font-size:85px;
+color:#ff3366;
+text-shadow:0 0 30px red;
+}
+
+.text p{
+margin-top:15px;
+font-size:22px;
+}
+
+/* floating hearts */
+.float{
+position:absolute;
+color:#ff4d88;
+font-size:20px;
+animation:rise linear infinite;
+}
+
+@keyframes rise{
+0%{
+transform:translateY(100vh) scale(0);
+opacity:0;
+}
+100%{
+transform:translateY(-10vh) scale(1.5);
+opacity:1;
+}
+}
+</style>
+</head>
+<body>
+
+<div class="bg"></div>
+
+<div id="lock">
+<div class="box">
+<h2 style="color:white;margin-bottom:20px;">Enter Password</h2>
+<input id="pass" type="password" placeholder="2531">
+<br>
+<button onclick="unlock()">Open</button>
+<p id="err" style="color:red;margin-top:10px;"></p>
+</div>
+</div>
+
+<div id="main">
+
+<div class="text">
+<h1>I Love You እድል</h1>
+<p>"Every heartbeat whispers your name."</p>
+</div>
+
+<svg class="ecg" viewBox="0 0 1200 200">
+<polyline
+fill="none"
+stroke="#ff004c"
+stroke-width="5"
+points="
+0,100 100,100 140,100 170,20 200,180 250,100
+500,100 540,100 570,20 600,180 650,100
+900,100 940,100 970,20 1000,180 1050,100 1200,100">
+<animate attributeName="stroke-dashoffset"
+from="2000" to="0"
+dur="3s"
+repeatCount="indefinite"/>
+</polyline>
+</svg>
+
+<img src="25811.jpg" class="heart">
+
+<audio id="music" loop>
+<source src="song.mp3" type="audio/mpeg">
+</audio>
+
+</div>
+
+<script>
+function unlock(){
+let p=document.getElementById("pass").value;
+
+if(p==="2531"){
+document.getElementById("lock").style.display="none";
+document.getElementById("main").style.display="block";
+document.getElementById("music").play();
+}
+else{
+document.getElementById("err").innerText="Wrong Password!";
+}
+}
+
+/* floating hearts */
+for(let i=0;i<40;i++){
+let h=document.createElement("div");
+h.className="float";
+h.innerHTML="❤";
+h.style.left=Math.random()*100+"vw";
+h.style.animationDuration=(3+Math.random()*5)+"s";
+h.style.fontSize=(15+Math.random()*30)+"px";
+document.body.appendChild(h);
+}
+</script>
+
+</body>
+</html>
